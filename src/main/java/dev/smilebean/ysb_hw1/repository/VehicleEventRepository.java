@@ -1,7 +1,7 @@
-package repository;
+package dev.smilebean.ysb_hw1.repository;
 
-import domain.Vehicle;
-import domain.VehicleEvent;
+import dev.smilebean.ysb_hw1.domain.Vehicle;
+import dev.smilebean.ysb_hw1.domain.VehicleEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

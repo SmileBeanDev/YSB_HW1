@@ -1,9 +1,9 @@
-package domain;
+package dev.smilebean.ysb_hw1.domain;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 

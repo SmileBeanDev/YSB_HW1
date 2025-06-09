@@ -1,4 +1,4 @@
-package domain;
+package dev.smilebean.ysb_hw1.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;

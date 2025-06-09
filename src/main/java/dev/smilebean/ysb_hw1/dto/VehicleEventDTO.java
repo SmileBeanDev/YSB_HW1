@@ -1,8 +1,8 @@
-package dto;
+package dev.smilebean.ysb_hw1.dto;
 
-import domain.Event;
-import domain.Vehicle;
-import domain.VehicleEvent;
+import dev.smilebean.ysb_hw1.domain.Event;
+import dev.smilebean.ysb_hw1.domain.Vehicle;
+import dev.smilebean.ysb_hw1.domain.VehicleEvent;
 import lombok.Getter;
 import lombok.Setter;
 

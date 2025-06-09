@@ -1,6 +1,6 @@
-package repository;
+package dev.smilebean.ysb_hw1.repository;
 
-import domain.VehicleType;
+import dev.smilebean.ysb_hw1.domain.VehicleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

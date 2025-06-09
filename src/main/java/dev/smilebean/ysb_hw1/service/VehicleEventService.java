@@ -1,14 +1,13 @@
-package service;
+package dev.smilebean.ysb_hw1.service;
 
-import domain.Event;
-import domain.Vehicle;
-import domain.VehicleEvent;
-import dto.VehicleEventDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import dev.smilebean.ysb_hw1.domain.Event;
+import dev.smilebean.ysb_hw1.domain.Vehicle;
+import dev.smilebean.ysb_hw1.domain.VehicleEvent;
+import dev.smilebean.ysb_hw1.dto.VehicleEventDTO;
 import org.springframework.stereotype.Service;
-import repository.EventRepository;
-import repository.VehicleEventRepository;
-import repository.VehicleRepository;
+import dev.smilebean.ysb_hw1.repository.EventRepository;
+import dev.smilebean.ysb_hw1.repository.VehicleEventRepository;
+import dev.smilebean.ysb_hw1.repository.VehicleRepository;
 
 import java.util.ArrayList;
 import java.util.List;
