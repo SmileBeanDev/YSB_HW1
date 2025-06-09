@@ -9,5 +9,4 @@ public class YsbHw1Application {
     public static void main(String[] args) {
         SpringApplication.run(YsbHw1Application.class, args);
     }
-
 }
