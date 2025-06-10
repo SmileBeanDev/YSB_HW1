@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import dev.smilebean.ysb_hw1.repository.EventRepository;
 import dev.smilebean.ysb_hw1.repository.VehicleEventRepository;
 import dev.smilebean.ysb_hw1.repository.VehicleRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,10 @@ public class VehicleEventService {
         return convertToDTO(vehicleEvents);
     }
 
+    @Transactional
+    // @Transactional 거는게 정말로 중요함
+    // 클라이언트가 서버에 외래키 무결성 제약 위반하는 POST 요청을 해도 클라이언트랑 서버는 오류만 뱉고 DBMS에는 쿼리를 적용한다
+    // 웃긴건 DBMS에 직접 쿼리를 치면 외래키 무결성으로 막히는데, 위같은 경우에는 뚤린다.
     public VehicleEventDTO save(VehicleEventDTO vehicleEventDTO) {
         // 차량 번호 조회
         Vehicle vehicle = vehicleRepository.findByVehicleId(vehicleEventDTO.getVehicleId());

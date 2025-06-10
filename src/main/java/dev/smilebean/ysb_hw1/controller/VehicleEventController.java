@@ -8,7 +8,7 @@ import dev.smilebean.ysb_hw1.service.VehicleEventService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vehicle-event")
+@RequestMapping("api/vehicle-event")
 public class VehicleEventController {
     private final VehicleEventService vehicleEventService;
 

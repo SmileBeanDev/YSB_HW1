@@ -10,7 +10,7 @@ import lombok.Setter;
 public class VehicleRegion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long no;
     @Column(name = "REGION_NAME", length = 30)
     private String regionName;
 }

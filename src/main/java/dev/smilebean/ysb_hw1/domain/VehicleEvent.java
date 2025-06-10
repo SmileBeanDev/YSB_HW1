@@ -14,7 +14,7 @@ import lombok.Setter;
 public class VehicleEvent {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private Long no;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="VEHICLE_NO")
