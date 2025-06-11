@@ -1,0 +1,58 @@
+type VehicleEventDTO {
+    no: ID!
+    vehicleId: String!
+    eventName: String!
+    createdAt: String!
+}
+
+type VehicleEvent {
+    no: ID!
+    vehicle: Vehicle!
+    event: Event!
+    createdAt: String!
+}
+
+type Vehicle {
+    no: ID!
+    vehicleId: String!
+    vehicleType: VehicleType!
+    vehicleRegion: VehicleRegion!
+    vehicleTerminal: VehicleTerminal!
+}
+
+type Event {
+    no: ID!
+    eventName: String!
+}
+
+type VehicleType {
+    no: ID!
+    vehicleTypeName: String!
+}
+
+type VehicleRegion {
+    no: ID!
+    regionName: String!
+}
+
+type VehicleTerminal {
+    no: ID!
+    serial: String!
+    installedDate: String!
+    status: String!
+}
+
+type Query {
+    allVehicleEvents: [VehicleEventDTO]!
+    vehicleEventsByVehicleId(vehicleId: String!): [VehicleEventDTO]!
+}
+
+type Mutation {
+    addVehicleEvent(input: addVehicleEventInput!): String!
+}
+
+input addVehicleEventInput {
+    vehicleId: String!
+    eventName: String!
+    createdAt: String!
+}

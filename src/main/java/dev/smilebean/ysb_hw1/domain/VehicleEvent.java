@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -26,4 +27,9 @@ public class VehicleEvent {
 
     @Column(name="CREATED_AT",nullable = false)
     private LocalDateTime createdAt;
+
+    @Override
+    public String toString() {
+        return "VehicleEvent [no=" + no + ", vehicleClass=" + vehicle.getClass() + ", eventClass=" + event.getClass() + ", createdAt=" + createdAt;
+    }
 }
