@@ -22,7 +22,7 @@ public class VehicleEventService {
     private final VehicleRepository vehicleRepository;
     private final EventRepository eventRepository;
 
-    @Transactional(readOnly = true)
+
     public List<VehicleEventDTO> findAllVehicleEvents() {
         // 모든 발생한 이벤트 내역을 조회
         List<VehicleEvent> vehicleEvents = vehicleEventRepository.findAll();
