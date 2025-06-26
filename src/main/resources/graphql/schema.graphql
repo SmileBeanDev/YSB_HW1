@@ -45,6 +45,11 @@ type VehicleTerminal {
 type Query {
     allVehicleEvents: [VehicleEventDTO]!
     vehicleEventsByVehicleId(vehicleId: String!): [VehicleEventDTO]!
+    whatIsGqlContext(
+        partnersIds: [Int]!
+        date : Int!
+        countSize: Int
+    ) : String
 }
 
 type Mutation {

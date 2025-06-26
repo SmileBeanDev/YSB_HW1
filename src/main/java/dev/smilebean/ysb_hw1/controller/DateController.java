@@ -11,14 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.WeekFields;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 @RestController
 @RequestMapping("/date")
@@ -33,7 +29,7 @@ public class DateController {
     }
 
     @GetMapping("get-korean-week-first-day")
-    public ResponseEntity<String> getKorWeekFirstDay(@RequestParam int year,@RequestParam int week) {
+    public ResponseEntity<String> getKorWeekFirstDay(@RequestParam int year, @RequestParam int week) {
         return ResponseEntity.ok(dateUtil.getKorWeekFirstDay(year, week).toString());
     }
 
@@ -48,11 +44,64 @@ public class DateController {
             System.out.println(date);
             date = dateUtil.setUtc(date);
             // UTC 로 변환함
-            String dateString = date.toString().replace("KST","");
+            String dateString = date.toString().replace("KST", "");
             return ResponseEntity.ok(dateString);
         } catch (ParseException e) {
             log.error("controller - 입력 받은거 날짜 형식 이상해: " + e.getMessage());
             return null;
+        }
+    }
+
+    @GetMapping("show")
+    public ResponseEntity<String> whatIsDate(@RequestParam String date) {
+        StringBuilder result = new StringBuilder();
+        // Date - SimpleDateFormat - 옜날 것임, 레거시임
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date parsedDate = sdf.parse(date);
+            result.append("java.util.Date: ").append(sdf.format(parsedDate)).append("\n");
+        } catch (ParseException e) {
+            result.append("Date 파싱 실패: ").append(e.getMessage()).append("\n");
+        }
+
+        // LocalDate : yyyy-MM-dd 형식
+        try {
+            LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
+            result.append("java.time.LocalDate: ").append(localDate).append("\n");
+        } catch (DateTimeParseException e) {
+            result.append("LocalDate 파싱 실패: ").append(e.getMessage()).append("\n");
+        }
+
+        // LocalDateTime : yyyy-MM-dd hh:mm:ss 형식
+        try {
+            LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            result.append("java.time.LocalDateTime: ").append(localDateTime).append("\n");
+        } catch (DateTimeParseException e) {
+            result.append("LocalDateTime 파싱 실패: ").append(e.getMessage()).append("\n");
+        }
+
+        // ZonedDateTime : LocalDateTime + Time Zone
+        try {
+            LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("Asia/Seoul"));
+            result.append("java.time.ZonedDateTime(KST): ").append(zonedDateTime).append("\n");
+            zonedDateTime = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
+            result.append("java.time.ZonedDateTime(UTC): ").append(zonedDateTime).append("\n");
+        } catch (DateTimeParseException e) {
+            result.append("ZonedDateTime 파싱 실패: ").append(e.getMessage()).append("\n");
+        }
+        return ResponseEntity.ok(result.toString());
+    }
+
+    @GetMapping("to-string")
+    public ResponseEntity<String> dateToString(@RequestParam String date) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date parsedDate = sdf.parse(date);
+            String reParsedDate = sdf.format(parsedDate);
+            return ResponseEntity.ok(reParsedDate + " is a String");
+        } catch (ParseException e) {
+            return ResponseEntity.ok(e.getMessage());
         }
     }
 }
